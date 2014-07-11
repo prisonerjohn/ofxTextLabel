@@ -65,16 +65,17 @@ void ofxTextLabel_<T>::drawLines(T& font, vector<string>& textLines, ofRectangle
     else if (alignHorz == OF_ALIGN_HORZ_CENTER) {
         textBounds.x = drawBounds.x + (drawBounds.width - textBounds.width) / 2.0f;
     }
-    else {  // (alignHorz == OF_ALIGN_HORZ_RIGHT)
+    else if (alignHorz == OF_ALIGN_HORZ_RIGHT) {
         textBounds.x = drawBounds.x + drawBounds.width - textBounds.width;
     }
+    
     if (alignVert == OF_ALIGN_VERT_TOP) {
         textBounds.y = drawBounds.y;
     }
     else if (alignVert == OF_ALIGN_VERT_CENTER) {
         textBounds.y = drawBounds.y + (drawBounds.height - textBounds.height) / 2.0f;
     }
-    else {  // (alignVert == OF_ALIGN_VERT_BOTTOM)
+    else if (alignVert == OF_ALIGN_VERT_BOTTOM) {
         textBounds.y = drawBounds.y + drawBounds.height - textBounds.height;
     }
     
@@ -82,7 +83,7 @@ void ofxTextLabel_<T>::drawLines(T& font, vector<string>& textLines, ofRectangle
     ofRectangle lineBounds;
     for (int i = 0; i < textLines.size(); i++) {
         lineBounds = font.getStringBoundingBox(textLines[i], 0, 0);
-        if (alignHorz == OF_ALIGN_HORZ_LEFT) {
+        if (alignHorz == OF_ALIGN_HORZ_LEFT || alignHorz == OF_ALIGN_HORZ_IGNORE) {
             lineX = textBounds.x;
         }
         else if (alignHorz == OF_ALIGN_HORZ_CENTER) {
