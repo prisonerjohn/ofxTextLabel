@@ -114,7 +114,7 @@ ofxTextLabel_<T>::ofxTextLabel_()
 , _lineSpacing(1.0f)
 , _alignHorz(OF_ALIGN_HORZ_LEFT)
 , _alignVert(OF_ALIGN_VERT_TOP)
-, _bNeedsRebuild(false)
+, _bDirty(false)
 {
     
 }
@@ -150,15 +150,15 @@ template<typename T>
 void ofxTextLabel_<T>::rebuild()
 {
     stringToLines(*_font, _text, _drawBounds.width, _textLines, _textBounds, _lineSpacing);
+    _bDirty = false;
 }
 
 //--------------------------------------------------------------
 template<typename T>
 void ofxTextLabel_<T>::update()
 {
-    if (_bNeedsRebuild) {
+    if (_bDirty) {
         rebuild();
-        _bNeedsRebuild = false;
     }
 }
 
@@ -175,7 +175,7 @@ void ofxTextLabel_<T>::setFont(T * font)
 {
     if (_font != font) {
         _font = font;
-        _bNeedsRebuild = true;
+        _bDirty = true;
     }
 }
 
@@ -185,7 +185,7 @@ void ofxTextLabel_<T>::setText(const string& text)
 {
     if (_text != text) {
         _text = text;
-        _bNeedsRebuild = true;
+        _bDirty = true;
     }
 }
 
@@ -195,7 +195,7 @@ void ofxTextLabel_<T>::setLineLength(float lineLength)
 {
     if (_drawBounds.width != lineLength) {
         _drawBounds.width = lineLength;
-        _bNeedsRebuild = true;
+        _bDirty = true;
     }
 }
 
@@ -204,8 +204,10 @@ template<typename T>
 void ofxTextLabel_<T>::setDrawBounds(const ofRectangle& drawBounds)
 {
     if (_drawBounds != drawBounds) {
+        if (_drawBounds.width != drawBounds.width || _drawBounds.height != drawBounds.height) {
+            _bDirty = true;
+        }
         _drawBounds = drawBounds;
-        _bNeedsRebuild = true;
     }
 }
 
@@ -215,7 +217,7 @@ void ofxTextLabel_<T>::setLineSpacing(float lineSpacing)
 {
     if (_lineSpacing != lineSpacing) {
         _lineSpacing = lineSpacing;
-        _bNeedsRebuild = true;
+        _bDirty = true;
     }
 }
 
@@ -225,7 +227,7 @@ void ofxTextLabel_<T>::setAlignHorz(ofAlignHorz alignHorz)
 {
     if (_alignHorz != alignHorz) {
         _alignHorz = alignHorz;
-        _bNeedsRebuild = true;
+        _bDirty = true;
     }
 }
 
@@ -235,7 +237,7 @@ void ofxTextLabel_<T>::setAlignVert(ofAlignVert alignVert)
 {
     if (_alignVert != alignVert) {
         _alignVert = alignVert;
-        _bNeedsRebuild = true;
+        _bDirty = true;
     }
 }
 
