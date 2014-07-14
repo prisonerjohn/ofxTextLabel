@@ -53,6 +53,7 @@ public:
     const vector<string>& getTextLines() { return _textLines; }
     const ofRectangle& getTextBounds() { return _textBounds; }
     
+    void setDirty() { _bDirty = true; }
     bool isDirty() { return _bDirty; }
     
 protected:
