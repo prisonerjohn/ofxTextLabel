@@ -56,6 +56,8 @@ public:
     void setDirty() { _bDirty = true; }
     bool isDirty() { return _bDirty; }
     
+    bool isEmpty() { return _textLines.empty(); }
+    
 protected:
     T * _font;
     string _text;
