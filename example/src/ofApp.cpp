@@ -55,7 +55,7 @@ void ofApp::draw()
     vector<string> textLines;
     ofxTextLabel::drawString(font, sampleText, frameBounds, textLines, textBounds, lineSpacing, alignHorz, alignVert);
     
-    ofSetColor(255, 127);
+    ofSetColor(255, 255, 0, 127);
     ofNoFill();
     
     ofRect(textBounds);
