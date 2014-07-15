@@ -7,7 +7,7 @@
 //
 
 #include "ofApp.h"
-#include "ofxFontUtils.h"
+#include "ofxTextLabel.h"
 
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -53,9 +53,9 @@ void ofApp::draw()
     
     ofRectangle textBounds;
     vector<string> textLines;
-    ofxFontDrawString(font, sampleText, frameBounds, textLines, textBounds, lineSpacing, alignHorz, alignVert);
+    ofxTextLabel::drawString(font, sampleText, frameBounds, textLines, textBounds, lineSpacing, alignHorz, alignVert);
     
-    ofSetColor(255, 127);
+    ofSetColor(255, 255, 0, 127);
     ofNoFill();
     
     ofRect(textBounds);

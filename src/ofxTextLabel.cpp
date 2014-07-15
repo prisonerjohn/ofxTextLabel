@@ -46,11 +46,16 @@ void ofxTextLabel_<T>::stringToLines(T& font, const string& str, float lineLengt
     
     // Calculate the bounds.
     textBounds.width = 0;
-    textBounds.height = font.getLineHeight() * lineSpacing * (textLines.size() - 1);
-    for (int i = 0; i < textLines.size(); i++) {
-        textBounds.width = MAX(textBounds.width, font.stringWidth(textLines[i]));
-        if (i == textLines.size() - 1) {
-            textBounds.height += font.stringHeight(textLines[i]);
+    if (textLines.empty()) {
+        textBounds.height = 0;
+    }
+    else {
+        textBounds.height = font.getLineHeight() * lineSpacing * (textLines.size() - 1);
+        for (int i = 0; i < textLines.size(); i++) {
+            textBounds.width = MAX(textBounds.width, font.stringWidth(textLines[i]));
+            if (i == textLines.size() - 1) {
+                textBounds.height += font.stringHeight(textLines[i]);
+            }
         }
     }
 }
