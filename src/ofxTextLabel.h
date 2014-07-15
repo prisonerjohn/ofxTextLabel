@@ -26,7 +26,7 @@ public:
     void setup(T * font, const string& text, const ofRectangle& drawBounds, float lineSpacing = 1.0f, ofAlignHorz alignHorz = OF_ALIGN_HORZ_LEFT, ofAlignVert alignVert = OF_ALIGN_VERT_TOP);
     
     virtual void rebuild();
-    virtual void update();
+    virtual bool update();
     virtual void draw();
     
     void setFont(T * font);

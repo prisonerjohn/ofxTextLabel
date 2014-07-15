@@ -156,11 +156,13 @@ void ofxTextLabel_<T>::rebuild()
 
 //--------------------------------------------------------------
 template<typename T>
-void ofxTextLabel_<T>::update()
+bool ofxTextLabel_<T>::update()
 {
     if (_bDirty) {
         rebuild();
+        return true;
     }
+    return false;
 }
 
 //--------------------------------------------------------------
