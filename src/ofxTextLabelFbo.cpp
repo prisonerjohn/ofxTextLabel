@@ -114,3 +114,13 @@ void ofxTextLabelFbo_<T>::setDrawBounds(const ofRectangle& drawBounds)
         this->_bDirty = true;
     }
 }
+
+//--------------------------------------------------------------
+template<typename T>
+void ofxTextLabelFbo_<T>::setClearColor(const ofColor &clearColor)
+{
+    if (_clearColor != clearColor) {
+        _clearColor = clearColor;
+        this->_bDirty = true;
+    }
+}
