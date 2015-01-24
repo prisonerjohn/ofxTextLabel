@@ -22,39 +22,41 @@ public:
     ofxTextLabel_();
     ~ofxTextLabel_();
     
-    void setup(T * font, const string& text, float lineLength, float lineSpacing = 1.0f, ofAlignHorz alignHorz = OF_ALIGN_HORZ_LEFT, ofAlignVert alignVert = OF_ALIGN_VERT_TOP);
-    void setup(T * font, const string& text, const ofRectangle& drawBounds, float lineSpacing = 1.0f, ofAlignHorz alignHorz = OF_ALIGN_HORZ_LEFT, ofAlignVert alignVert = OF_ALIGN_VERT_TOP);
+    virtual void setup(T * font, const string& text, float lineLength, float lineSpacing = 1.0f, ofAlignHorz alignHorz = OF_ALIGN_HORZ_LEFT, ofAlignVert alignVert = OF_ALIGN_VERT_TOP);
+    virtual void setup(T * font, const string& text, const ofRectangle& drawBounds, float lineSpacing = 1.0f, ofAlignHorz alignHorz = OF_ALIGN_HORZ_LEFT, ofAlignVert alignVert = OF_ALIGN_VERT_TOP);
     
     virtual void rebuild();
     virtual bool update();
     virtual void draw();
     
-    void setFont(T * font);
-    T * getFont() { return _font; }
+    virtual void setFont(T * font);
+    T * getFont() const { return _font; }
     
-    void setText(const string& text);
-    const string& getText() { return _text; }
+    virtual void setText(const string& text);
+    const string& getText() const { return _text; }
     
-    void setLineLength(float lineLength);
-    float getLineLength() { return _drawBounds.width; }
+    virtual void setLineLength(float lineLength);
+    float getLineLength() const { return _drawBounds.width; }
     
-    void setDrawBounds(const ofRectangle& drawBounds);
-    const ofRectangle& getDrawBounds() {  return _drawBounds; }
+    virtual void setDrawBounds(const ofRectangle& drawBounds);
+    const ofRectangle& getDrawBounds() const {  return _drawBounds; }
     
-    void setLineSpacing(float lineSpacing);
-    float getLineSpacing() { return _lineSpacing; }
+    virtual void setLineSpacing(float lineSpacing);
+    float getLineSpacing() const { return _lineSpacing; }
 
-    void setAlignHorz(ofAlignHorz alignHorz);
-    ofAlignHorz getAlignHorz() { return _alignHorz; }
+    virtual void setAlignHorz(ofAlignHorz alignHorz);
+    ofAlignHorz getAlignHorz() const { return _alignHorz; }
     
-    void setAlignVert(ofAlignVert alignVert);
-    ofAlignVert getAlignVert() { return _alignVert; }
+    virtual void setAlignVert(ofAlignVert alignVert);
+    ofAlignVert getAlignVert() const { return _alignVert; }
     
-    const vector<string>& getTextLines() { return _textLines; }
-    const ofRectangle& getTextBounds() { return _textBounds; }
+    const vector<string>& getTextLines() const { return _textLines; }
+    const ofRectangle& getTextBounds() const { return _textBounds; }
     
-    void setDirty() { _bDirty = true; }
-    bool isDirty() { return _bDirty; }
+    virtual void setDirty() { _bDirty = true; }
+    bool isDirty() const { return _bDirty; }
+    
+    bool isEmpty() const { return _textLines.empty(); }
     
 protected:
     T * _font;
