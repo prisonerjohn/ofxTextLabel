@@ -17,9 +17,9 @@ void ofApp::setup()
     ofSetBackgroundAuto(false);
     
     ofTrueTypeFont::setGlobalDpi(72);
-    font.loadFont("verdana.ttf", 78);
+    font.loadFont("verdana.ttf", 60);
     
-    sampleText = "HERE IS SOME AWESOME SAMPLE TEXT";
+    sampleText = "Here is some sample text:\nThe quick brown fox jumped over the lazy dog.";
     lineSpacing = 1.0f;
     
     alignHorz = OF_ALIGN_HORZ_LEFT;
