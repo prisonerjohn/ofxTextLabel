@@ -86,6 +86,7 @@ void ofxTextLabel_<T>::drawLines(T& font, vector<string>& textLines, ofRectangle
     
     float lineX, lineY;
     ofRectangle lineBounds;
+    lineY = textBounds.y;
     for (int i = 0; i < textLines.size(); i++) {
         lineBounds = font.getStringBoundingBox(textLines[i], 0, 0);
         if (alignHorz == OF_ALIGN_HORZ_LEFT || alignHorz == OF_ALIGN_HORZ_IGNORE) {
@@ -97,7 +98,12 @@ void ofxTextLabel_<T>::drawLines(T& font, vector<string>& textLines, ofRectangle
         else {  // (alignHorz == OF_ALIGN_HORZ_RIGHT)
             lineX = textBounds.x + textBounds.width - lineBounds.width;
         }
-        lineY = textBounds.y + font.getLineHeight() * lineSpacing * i + lineBounds.height;
+        if (i == 0) {
+            lineY += lineBounds.height;
+        }
+        else {
+            lineY += font.getLineHeight() * lineSpacing;
+        }
         
         font.drawString(textLines[i], lineX, lineY);
     }
