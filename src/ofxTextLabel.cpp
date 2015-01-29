@@ -99,7 +99,7 @@ void ofxTextLabel_<T>::drawLines(T& font, vector<string>& textLines, ofRectangle
             lineX = textBounds.x + textBounds.width - lineBounds.width;
         }
         if (i == 0) {
-            lineY += lineBounds.height;
+            lineY += font.stringHeight("Ad");  // Easiest way to get ascender height.
         }
         else {
             lineY += font.getLineHeight() * lineSpacing;
