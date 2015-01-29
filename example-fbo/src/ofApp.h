@@ -37,8 +37,6 @@ public:
     
     ofAlignHorz alignHorz;
     ofAlignVert alignVert;
-    
-    ofRectangle frameBounds;
-    
+        
     ofxTextLabelFbo textLabelFbo;
 };

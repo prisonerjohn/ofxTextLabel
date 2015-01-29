@@ -24,10 +24,7 @@ void ofApp::setup()
     alignHorz = OF_ALIGN_HORZ_LEFT;
     alignVert = OF_ALIGN_VERT_TOP;
     
-    float frameWidth = 600;
-    float frameHeight = 400;
-    frameBounds.set((ofGetWidth() - frameWidth) / 2.0f, (ofGetHeight() - frameHeight) / 2.0f, frameWidth, frameHeight);
-    
+    ofRectangle frameBounds(20, 20, 600, 400);
     textLabelFbo.setup(&font, sampleText, frameBounds);
 }
 
@@ -44,26 +41,34 @@ void ofApp::draw()
 {
     ofBackground(0);
     
-    ofSetColor(255, 127);
+    ofPushMatrix();
+    ofTranslate((ofGetWidth() - textLabelFbo.getWidth()) / 2.0f, (ofGetHeight() - textLabelFbo.getHeight()) / 2.0f);
+    
+    ofSetColor(255, 64);
+    ofFill();
+    
+    ofRect(0, 0, textLabelFbo.getWidth(), textLabelFbo.getHeight());
+    ofRect(textLabelFbo.getDrawBounds());
+    ofRect(textLabelFbo.getTextBounds());
+
+    ofSetColor(255, 200);
     ofNoFill();
     
-    ofRect(frameBounds);
-    ofLine(frameBounds.x + frameBounds.width / 2.0f, frameBounds.y, frameBounds.x + frameBounds.width / 2.0f, frameBounds.y + frameBounds.height);
-    ofLine(frameBounds.x, frameBounds.y + frameBounds.height / 2.0f, frameBounds.x + frameBounds.width, frameBounds.y + frameBounds.height / 2.0f);
+    ofLine(textLabelFbo.getDrawBounds().getCenter().x, textLabelFbo.getDrawBounds().getTop(), textLabelFbo.getDrawBounds().getCenter().x, textLabelFbo.getDrawBounds().getBottom());
+    ofLine(textLabelFbo.getDrawBounds().getLeft(), textLabelFbo.getDrawBounds().getCenter().y, textLabelFbo.getDrawBounds().getRight(), textLabelFbo.getDrawBounds().getCenter().y);
     
     ofSetColor(255);
     ofFill();
-    
-//    ofRectangle textBounds;
-//    vector<string> textLines;
-//    ofxTextLabel::drawString(font, sampleText, frameBounds, textLines, textBounds, lineSpacing, alignHorz, alignVert);
-    
+
     textLabelFbo.draw();
     
     ofSetColor(255, 255, 0, 127);
     ofNoFill();
+    ofSetLineWidth(2.0);
     
     ofRect(textLabelFbo.getTextBounds());
+    
+    ofPopMatrix();
     
     ofSetColor(255);
     stringstream ss;
